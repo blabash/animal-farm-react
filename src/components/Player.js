@@ -2,11 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router';
 
-function Player({ players }) {
-  console.log(players);
-  let { playerName } = useParams();
-  playerName = playerName.split('-').join(' ');
-  const playerObj = players.find((p) => p.name === playerName);
+function Player({ response: players }) {
+  let { entityName } = useParams();
+  entityName = entityName.split('-').join(' ');
+  const playerObj = players.find((p) => p.name === entityName);
 
   return (
     <div className='panel'>
@@ -49,7 +48,7 @@ function Player({ players }) {
 }
 
 Player.propTypes = {
-  players: PropTypes.arrayOf(PropTypes.object).isRequired,
+  response: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default Player;
