@@ -3,6 +3,8 @@ import { Route, BrowserRouter as Router } from 'react-router-dom';
 
 import Navbar from './Navbar';
 import Home from './Home';
+import Players from './Players';
+import Teams from './Teams';
 
 export default function App() {
   return (
@@ -13,8 +15,12 @@ export default function App() {
         <Route exact path='/'>
           <Home />
         </Route>
-        <Route path='/players'></Route>
-        <Route path='/teams'></Route>
+        <Route path='/players'>
+          <Players />
+        </Route>
+        <Route path='/teams'>
+          <Teams />
+        </Route>
       </Router>
     </div>
   );

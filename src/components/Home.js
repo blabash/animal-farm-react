@@ -1,15 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import TeamLogo from './TeamLogo';
 import useTeamNames from '../hooks/useTeamNames';
 
-function Home(props) {
+function Home() {
   const { response: teamNames, loading } = useTeamNames();
-  console.log(teamNames);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <p className='text-center'>Loading...</p>;
   return (
     <div>
       <h1 className='large-header'>Hash History Basketball League</h1>
@@ -24,7 +22,5 @@ function Home(props) {
     </div>
   );
 }
-
-Home.propTypes = {};
 
 export default Home;
