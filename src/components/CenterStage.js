@@ -1,18 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useLocation, useRouteMatch } from 'react-router';
-import { Link, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+import SelectedLink from './SelectedLink';
 
 function CenterStage({ dataFetch, header, Component }) {
   const { url, path, isExact } = useRouteMatch();
 
-  const { search } = useLocation();
-  const parsed = new URLSearchParams(search);
+  const location = useLocation();
+  const parsed = new URLSearchParams(location.search);
   const teamId = parsed.get('teamId');
 
   let { loading, response } = dataFetch(teamId);
   if (response && !response[0].name) {
-    response = response.map((entity) => ({ name: entity })); //shape response correctly according to dataFetch return value, break out into separate functions if there are more response types
+    response = response.map((entity) => ({ name: entity })); //shape response correctly according to dataFetch return value, break out into separate functions if there are more response shapes
   }
 
   if (loading) return <p className='center-text'>Loading...</p>;
@@ -23,15 +24,15 @@ function CenterStage({ dataFetch, header, Component }) {
         <h3 className='header'>{header}</h3>
         <ul className='sidebar-list'>
           {response.map((entity) => (
-            <Link
+            <SelectedLink
               key={entity.name}
-              to={
-                `${url}/${entity.name.split(' ').join('-')}` +
-                (teamId ? `?teamId=${teamId}` : ``)
-              }
+              to={{
+                pathname: `${url}/${entity.name.split(' ').join('-')}`,
+                search: location.search,
+              }}
             >
               {entity.name}
-            </Link>
+            </SelectedLink>
           ))}
         </ul>
       </div>

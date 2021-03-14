@@ -7,8 +7,6 @@ import { Link } from 'react-router-dom';
 
 function Article() {
   const { teamId, articleId } = useParams();
-  console.log('articleId', articleId);
-  console.log('teamId', teamId);
   const { loading, response: article } = useArticle({ teamId, articleId });
 
   if (loading) return <p>Loading...</p>;
@@ -20,7 +18,6 @@ function Articles() {
   const { teamId } = useParams();
   const { url, path } = useRouteMatch();
   const { loading, response: articles } = useTeamsArticles(teamId);
-  // console.log('articles', articles);
 
   if (loading) return <p>Loading...</p>;
 
