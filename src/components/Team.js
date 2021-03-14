@@ -10,7 +10,6 @@ function Team({ response: teams }) {
   const { name } = teams.find((t) => t.name === entityName);
 
   const { loading, response: teamData } = useTeam(name);
-  console.log(teamData);
 
   if (loading) return <p>Loading...</p>;
 
@@ -38,6 +37,9 @@ function Team({ response: teams }) {
   );
 }
 
-Team.propTypes = {};
+Team.propTypes = {
+  response: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
+    .isRequired,
+};
 
 export default Team;

@@ -8,6 +8,8 @@ import Player from './Player';
 import usePlayers from '../hooks/usePlayers';
 import Team from './Team';
 import useTeamNames from '../hooks/useTeamNames';
+import TeamPage from './TeamPage';
+import Articles from './Articles';
 
 export default function App() {
   return (
@@ -32,6 +34,12 @@ export default function App() {
               header='Teams'
               Component={Team}
             />
+          </Route>
+          <Route exact path='/:teamId'>
+            <TeamPage />
+          </Route>
+          <Route path={`/:teamId/articles`}>
+            <Articles />
           </Route>
           <Router>
             <h1 className='text-center'>404 page not found</h1>

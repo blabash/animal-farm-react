@@ -4,7 +4,7 @@ import { useLocation, useRouteMatch } from 'react-router';
 import { Link, Route } from 'react-router-dom';
 
 function CenterStage({ dataFetch, header, Component }) {
-  const { url, path } = useRouteMatch();
+  const { url, path, isExact } = useRouteMatch();
 
   const { search } = useLocation();
   const parsed = new URLSearchParams(search);
@@ -35,6 +35,11 @@ function CenterStage({ dataFetch, header, Component }) {
           ))}
         </ul>
       </div>
+      {isExact && (
+        <div className='sidebar-instruction'>
+          Select a {header.slice(0, header.length - 1)}
+        </div>
+      )}
       <Route path={`${path}/:entityName`}>
         <Component response={response} />
       </Route>
@@ -42,6 +47,10 @@ function CenterStage({ dataFetch, header, Component }) {
   );
 }
 
-CenterStage.propTypes = {};
+CenterStage.propTypes = {
+  dataFetch: PropTypes.func.isRequired,
+  header: PropTypes.string.isRequired,
+  Component: PropTypes.func.isRequired,
+};
 
 export default CenterStage;
