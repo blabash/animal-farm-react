@@ -5,7 +5,7 @@ import { Route } from 'react-router-dom';
 import SelectedLink from './SelectedLink';
 
 function CenterStage({ dataFetch, header, Component }) {
-  const { url, path, isExact } = useRouteMatch();
+  const { url, path } = useRouteMatch();
 
   const location = useLocation();
   const parsed = new URLSearchParams(location.search);
@@ -16,7 +16,7 @@ function CenterStage({ dataFetch, header, Component }) {
     response = response.map((entity) => ({ name: entity })); //shape response correctly according to dataFetch return value, break out into separate functions if there are more response shapes
   }
 
-  if (loading) return <p className='center-text'>Loading...</p>;
+  if (loading) return <p className='text-center'>Loading...</p>;
 
   return (
     <div style={{ display: 'flex' }}>

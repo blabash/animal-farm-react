@@ -11,7 +11,7 @@ function Team({ response: teams }) {
 
   const { loading, response: teamData } = useTeam(name);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <p className='text-center'>Loading...</p>;
 
   return (
     <div className='panel'>

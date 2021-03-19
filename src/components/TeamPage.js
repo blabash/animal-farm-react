@@ -56,7 +56,7 @@ function TeamPage(props) {
     );
   }
 
-  return <p>Loading...</p>;
+  return <p className='text-center'>Loading...</p>;
 }
 
 TeamPage.propTypes = {};

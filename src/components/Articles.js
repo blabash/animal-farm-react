@@ -10,7 +10,7 @@ function Article() {
   const { teamId, articleId } = useParams();
   const { loading, response: article } = useArticle({ teamId, articleId });
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <p className='text-center'>Loading...</p>;
 
   return (
     <div className='panel'>
@@ -30,7 +30,7 @@ function Articles() {
   const { url, path } = useRouteMatch();
   const { loading, response: articles } = useTeamsArticles(teamId);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <p className='text-center'>Loading...</p>;
 
   return (
     <div className='container two-column'>
