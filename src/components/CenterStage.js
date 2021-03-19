@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useLocation, useRouteMatch } from 'react-router';
+import { Switch, useLocation, useRouteMatch } from 'react-router';
 import { Route } from 'react-router-dom';
 import SelectedLink from './SelectedLink';
 
@@ -36,14 +36,16 @@ function CenterStage({ dataFetch, header, Component }) {
           ))}
         </ul>
       </div>
-      {isExact && (
-        <div className='sidebar-instruction'>
-          Select a {header.slice(0, header.length - 1)}
-        </div>
-      )}
-      <Route path={`${path}/:entityName`}>
-        <Component response={response} />
-      </Route>
+      <Switch>
+        <Route exact path={`${path}`}>
+          <div className='sidebar-instruction'>
+            Select a {header.slice(0, header.length - 1)}
+          </div>
+        </Route>
+        <Route path={`${path}/:entityName`}>
+          <Component response={response} />
+        </Route>
+      </Switch>
     </div>
   );
 }
