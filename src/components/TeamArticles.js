@@ -11,7 +11,7 @@ function TeamArticles({ articles }) {
       <ul className='articles'>
         {articles.map((article) => (
           <li key={article.id}>
-            <Link to={`${url}/articles/${article.id}`}>
+            <Link to={`${url}/articles/${article.id.toLowerCase()}`}>
               <h4 className='article-title'>{article.title}</h4>
               <div className='article-date'>
                 {new Date(article.date).toLocaleDateString()}

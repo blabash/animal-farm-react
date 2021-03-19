@@ -4,6 +4,7 @@ import { Route, Switch, useParams, useRouteMatch } from 'react-router';
 import useTeamsArticles from '../hooks/useTeamsArticles';
 import useArticle from '../hooks/useArticle';
 import { Link } from 'react-router-dom';
+import SelectedLink from './SelectedLink';
 
 function Article() {
   const { teamId, articleId } = useParams();
@@ -11,7 +12,17 @@ function Article() {
 
   if (loading) return <p>Loading...</p>;
 
-  return <div className='panel'>YOOOO</div>;
+  return (
+    <div className='panel'>
+      <article className='article'>
+        <h1 className='header'>
+          {new Date(article.date).toLocaleDateString()}
+        </h1>
+        <h1 className='header'>{article.title}</h1>
+        <p>{article.body}</p>
+      </article>
+    </div>
+  );
 }
 
 function Articles() {
@@ -28,7 +39,11 @@ function Articles() {
         <ul className='sidebar-list'>
           {articles.map((article) => (
             <li key={article.id}>
-              <Link to={`${url}/${article.id}`}>{article.title}</Link>
+              <SelectedLink
+                to={{ pathname: `${url}/${article.id.toLowerCase()}` }}
+              >
+                {article.title}
+              </SelectedLink>
             </li>
           ))}
         </ul>

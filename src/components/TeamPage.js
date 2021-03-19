@@ -14,6 +14,9 @@ function TeamPage(props) {
     teamId
   );
 
+  if (!teamDataLoading && !teamData)
+    return <h1 className='header text-center'>Team doesn't exist</h1>;
+
   if (teamData && articles) {
     return (
       <div className='panel'>
