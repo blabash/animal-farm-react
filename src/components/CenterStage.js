@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import { Switch, useLocation, useRouteMatch } from 'react-router';
 import { Route } from 'react-router-dom';
 import SelectedLink from './SelectedLink';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import usePlayers from '../hooks/usePlayers';
+import useTeams from '../hooks/useTeams';
 
 function CenterStage({ dataFetch, header, Component }) {
   const { url, path } = useRouteMatch();
@@ -12,9 +15,6 @@ function CenterStage({ dataFetch, header, Component }) {
   const teamId = parsed.get('teamId');
 
   let { loading, response } = dataFetch(teamId);
-  if (response && !response[0].name) {
-    response = response.map((entity) => ({ name: entity })); //shape response correctly according to dataFetch return value, break out into separate functions if there are more response shapes
-  }
 
   if (loading) return <p className='text-center'>Loading...</p>;
 
@@ -36,16 +36,20 @@ function CenterStage({ dataFetch, header, Component }) {
           ))}
         </ul>
       </div>
-      <Switch>
-        <Route exact path={`${path}`}>
-          <div className='sidebar-instruction'>
-            Select a {header.slice(0, header.length - 1)}
-          </div>
-        </Route>
-        <Route path={`${path}/:entityName`}>
-          <Component response={response} />
-        </Route>
-      </Switch>
+      <TransitionGroup component={null}>
+        <CSSTransition key={location.key} classNames='fade' timeout={3000}>
+          <Switch location={location}>
+            <Route exact path={`${path}`}>
+              <div className='sidebar-instruction'>
+                Select a {header.slice(0, header.length - 1)}
+              </div>
+            </Route>
+            <Route path={`${path}/:entityName`}>
+              <Component response={response} />
+            </Route>
+          </Switch>
+        </CSSTransition>
+      </TransitionGroup>
     </div>
   );
 }

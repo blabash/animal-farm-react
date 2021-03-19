@@ -5,11 +5,12 @@ import Navbar from './Navbar';
 import Home from './Home';
 import CenterStage from './CenterStage';
 import Player from './Player';
-import usePlayers from '../hooks/usePlayers';
 import Team from './Team';
-import useTeamNames from '../hooks/useTeamNames';
 import TeamPage from './TeamPage';
 import Articles from './Articles';
+
+import usePlayers from '../hooks/usePlayers';
+import useTeams from '../hooks/useTeams';
 
 export default function App() {
   return (
@@ -29,11 +30,7 @@ export default function App() {
             />
           </Route>
           <Route path='/teams'>
-            <CenterStage
-              dataFetch={useTeamNames}
-              header='Teams'
-              Component={Team}
-            />
+            <CenterStage dataFetch={useTeams} header='Teams' Component={Team} />
           </Route>
           <Route exact path='/:teamId'>
             <TeamPage />

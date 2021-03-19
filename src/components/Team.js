@@ -7,11 +7,7 @@ import TeamLogo from '../components/TeamLogo';
 function Team({ response: teams }) {
   let { entityName } = useParams();
   entityName = entityName.split('-').join(' ');
-  const { name } = teams.find((t) => t.name === entityName);
-
-  const { loading, response: teamData } = useTeam(name);
-
-  if (loading) return <p className='text-center'>Loading...</p>;
+  const teamData = teams.find((t) => t.name === entityName);
 
   return (
     <div className='panel'>
@@ -38,8 +34,7 @@ function Team({ response: teams }) {
 }
 
 Team.propTypes = {
-  response: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
-    .isRequired,
+  response: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default Team;
